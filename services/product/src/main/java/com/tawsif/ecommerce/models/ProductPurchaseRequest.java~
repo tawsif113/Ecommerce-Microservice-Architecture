@@ -1,0 +1,12 @@
+package com.tawsif.ecommerce.models;
+
+import jakarta.validation.constraints.NotNull;
+
+public record ProductPurchaseRequest(
+
+        @NotNull(message = "Product id is mandatory")
+        Integer productId,
+        double quantity
+
+) {
+}

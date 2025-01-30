@@ -1,0 +1,27 @@
+package com.tawsif.ecommerce.order;
+
+import com.tawsif.ecommerce.orderline.OrderLine;
+import com.tawsif.ecommerce.orderline.OrderLineRequest;
+import com.tawsif.ecommerce.orderline.OrderLineResponse;
+import org.springframework.stereotype.Service;
+
+@Service
+public class OrderLineMapper {
+
+    public OrderLine toOrderLine(OrderLineRequest orderLineRequest) {
+        return OrderLine.builder()
+                .id(orderLineRequest.id())
+                .productId(orderLineRequest.productId())
+                .quantity(orderLineRequest.quantity())
+                .order(
+                        Order.builder()
+                                .id(orderLineRequest.orderId())
+                                .build()
+                )
+                .build();
+    }
+
+    public OrderLineResponse toOrderLineResponse(OrderLine orderLine) {
+        return new OrderLineResponse(orderLine.getId(), orderLine.getQuantity());
+    }
+}

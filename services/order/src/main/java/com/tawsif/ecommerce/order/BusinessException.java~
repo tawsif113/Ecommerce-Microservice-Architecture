@@ -1,0 +1,4 @@
+package com.tawsif.ecommerce.order;
+
+public class BusinessException {
+}

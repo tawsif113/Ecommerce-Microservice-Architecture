@@ -1,0 +1,9 @@
+package com.tawsif.ecommerce.product;
+
+public record PurchaseRequest(
+
+        Integer productId,
+        
+
+) {
+}
