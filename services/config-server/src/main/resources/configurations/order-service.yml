@@ -14,7 +14,7 @@ spring:
     producer:
       bootstrap-servers: localhost:9092
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
-      value-serializer: org.apache.kafka.common.serialization.StringSerializer.JsonSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
         spring.json.type.mapping: orderConfirmation:com.tawsif.ecommerce.kafka.OrderConfirmation
 server:
@@ -22,6 +22,6 @@ server:
 
 application:
   config:
-    customer-url: http://localhost:8222/api/customers
-    product-url: http://localhost:8222/api/products
-    payment-url: http://localhost:8222/api/payments
+    customer-url: http://localhost:8222/api/v1/customers
+    product-url: http://localhost:8222/api/v1/products
+    payment-url: http://localhost:8222/api/v1/payments

@@ -8,11 +8,17 @@ public class PaymentMapper {
 
 
     public Payment toPayment(@Valid PaymentRequest request) {
-        return Payment.builder()
-                .id(request.id())
-                .amount(request.amount())
-                .orderId(request.orderId())
-                .paymentMethod(request.paymentMethod())
-                .build();
+//        return Payment.builder()
+//                .id(request.id())
+//                .amount(request.amount())
+//                .orderId(request.orderId())
+//                .paymentMethod(request.paymentMethod())
+//                .build();
+        Payment payment = new Payment();
+        payment.setId(request.id());
+        payment.setAmount(request.amount());
+        payment.setOrderId(request.orderId());
+        payment.setPaymentMethod(request.paymentMethod());
+        return payment;
     }
 }

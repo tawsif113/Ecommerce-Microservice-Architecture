@@ -2,6 +2,7 @@ package com.tawsif.ecommerce.product;
 
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -17,13 +18,16 @@ import static org.springframework.http.HttpMethod.POST;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 @Service
-@RequiredArgsConstructor
 public class ProductClient {
 
     @Value("${application.config.product-url}")
     private String productUrl;
     private final RestTemplate restTemplate;
 
+    @Autowired
+    public ProductClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public List<PurchaseResponse> purchaseProducts(List<PurchaseRequest> request){
 

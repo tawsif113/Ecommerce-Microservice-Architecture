@@ -11,13 +11,13 @@ import com.tawsif.ecommerce.product.ProductClient;
 import com.tawsif.ecommerce.product.PurchaseRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class OrderService {
 
     private final CustomerClient customerClient;
@@ -28,6 +28,17 @@ public class OrderService {
     private final OrderProducer orderProducer;
     private final PaymentClient paymentClient;
 
+
+    @Autowired
+    public OrderService(CustomerClient customerClient, ProductClient productClient, OrderRepository orderRepository, OrderMapper mapper, OrderLineService orderLineService, OrderProducer orderProducer, PaymentClient paymentClient) {
+        this.customerClient = customerClient;
+        this.productClient = productClient;
+        this.orderRepository = orderRepository;
+        this.mapper = mapper;
+        this.orderLineService = orderLineService;
+        this.orderProducer = orderProducer;
+        this.paymentClient = paymentClient;
+    }
     public Integer createOrder(@Valid OrderRequest request) {
 
         var customer = customerClient.findCustomerById(request.customerId()).orElseThrow(()->new BusinessException("Can not Create Order:: No customer Exist with provided id: " + request.customerId()));

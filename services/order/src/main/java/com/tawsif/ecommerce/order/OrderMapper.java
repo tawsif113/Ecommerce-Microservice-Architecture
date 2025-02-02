@@ -6,13 +6,20 @@ import org.springframework.stereotype.Service;
 public class OrderMapper {
 
     public Order toOrder(OrderRequest request) {
-        return Order.builder()
-                .id(request.id())
-                .customerId(request.customerId())
-                .reference(request.reference())
-                .totalAmount(request.amount())
-                .paymentMethod(request.paymentMethod())
-                .build();
+//        return Order.builder()
+//                .id(request.id())
+//                .customerId(request.customerId())
+//                .reference(request.reference())
+//                .totalAmount(request.amount())
+//                .paymentMethod(request.paymentMethod())
+//                .build();
+        Order order = new Order();
+        order.setId(request.id());
+        order.setCustomerId(request.customerId());
+        order.setReference(request.reference());
+        order.setTotalAmount(request.amount());
+        order.setPaymentMethod(request.paymentMethod());
+        return order;
     }
 
     public OrderResponse fromOrder(Order order) {

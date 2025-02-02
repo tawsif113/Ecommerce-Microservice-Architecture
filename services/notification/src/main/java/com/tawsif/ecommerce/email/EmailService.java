@@ -6,6 +6,7 @@ import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.encoders.UTF8;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -23,13 +24,17 @@ import static com.tawsif.ecommerce.email.EmailTemplates.PAYMENT_CONFIRMATION;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class EmailService {
 
     private final JavaMailSender javaMailSender;
     private final SpringTemplateEngine templateEngine;
 
+    @Autowired
+    public EmailService(JavaMailSender javaMailSender, SpringTemplateEngine templateEngine) {
+        this.javaMailSender = javaMailSender;
+        this.templateEngine = templateEngine;
+    }
     @Async
     public void sendPaymentSuccessEmail(
             String destinationEmail,
@@ -62,9 +67,9 @@ public class EmailService {
 
             messageHelper.setTo(destinationEmail);
             javaMailSender.send(mimeMessage);
-            log.info(String.format("INFO - Email successfully sent to %s with template %s ", destinationEmail, templateName));
+            System.out.println("INFO - Email successfully sent to "+destinationEmail+" with template "+ templateName);
         } catch (MessagingException e) {
-            log.warn("WARNING - Cannot send Email to {} ", destinationEmail);
+            System.out.println("WARNING - Cannot send Email to "+destinationEmail);
         }
 
     }
@@ -100,9 +105,9 @@ public class EmailService {
 
             messageHelper.setTo(destinationEmail);
             javaMailSender.send(mimeMessage);
-            log.info(String.format("INFO - Email successfully sent to %s with template %s ", destinationEmail, templateName));
+            System.out.println(String.format("INFO - Email successfully sent to %s with template %s ", destinationEmail, templateName));
         } catch (MessagingException e) {
-            log.warn("WARNING - Cannot send Email to {} ", destinationEmail);
+            System.out.println("WARNING - Cannot send Email to "+destinationEmail);
         }
 
     }

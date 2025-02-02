@@ -3,17 +3,23 @@ package com.tawsif.ecommerce.order;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
 public class OrderController {
 
     private final OrderService service;
+
+    @Autowired
+    public OrderController(OrderService service)
+    {
+        this.service = service;
+    }
 
     @PostMapping
     public ResponseEntity<Integer> createOrder(
