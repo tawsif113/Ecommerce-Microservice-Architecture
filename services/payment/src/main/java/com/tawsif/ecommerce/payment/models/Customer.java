@@ -1,4 +1,4 @@
-package com.tawsif.ecommerce.payment;
+package com.tawsif.ecommerce.payment.models;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;

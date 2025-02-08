@@ -1,5 +1,6 @@
-package com.tawsif.ecommerce.order;
+package com.tawsif.ecommerce.order.services;
 
+import com.tawsif.ecommerce.order.models.Order;
 import com.tawsif.ecommerce.orderline.OrderLine;
 import com.tawsif.ecommerce.orderline.OrderLineRequest;
 import com.tawsif.ecommerce.orderline.OrderLineResponse;

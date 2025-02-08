@@ -1,4 +1,4 @@
-package com.tawsif.ecommerce.payment;
+package com.tawsif.ecommerce.payment.models;
 
 import java.math.BigDecimal;
 

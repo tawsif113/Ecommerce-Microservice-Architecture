@@ -1,4 +1,4 @@
-package com.tawsif.ecommerce.order;
+package com.tawsif.ecommerce.order.repositories;
 
 import com.tawsif.ecommerce.orderline.OrderLine;
 import org.springframework.data.jpa.repository.JpaRepository;

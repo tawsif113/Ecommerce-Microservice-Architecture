@@ -1,9 +1,9 @@
-package com.tawsif.ecommerce.payment;
+package com.tawsif.ecommerce.order.models;
 
 public enum PaymentMethod {
     PAYPAL,
     CREDIT_CARD,
     VISA,
-    MASTERCARD,
+    MASTER_CARD,
     BITCOIN
 }

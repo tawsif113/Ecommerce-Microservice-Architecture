@@ -2,6 +2,7 @@ package com.tawsif.ecommerce.services;
 
 import com.netflix.discovery.converters.Auto;
 import com.tawsif.ecommerce.exceptions.CustomerNotFoundException;
+import com.tawsif.ecommerce.kafka.CustomerEventProducer;
 import com.tawsif.ecommerce.models.Customer;
 import com.tawsif.ecommerce.models.CustomerRequest;
 import com.tawsif.ecommerce.models.CustomerResponse;
@@ -23,9 +24,12 @@ public class CustomerService {
 
     private final CustomerRepository repository;
     private final CustomerMapper mapper;
+    private final CustomerEventProducer publisher;
+
 
     @Autowired
-    public CustomerService(CustomerRepository repository, CustomerMapper mapper) {
+    public CustomerService(CustomerRepository repository, CustomerMapper mapper, CustomerEventProducer producer) {
+        this.publisher = producer;
         this.repository = repository;
         this.mapper = mapper;
     }
@@ -33,6 +37,9 @@ public class CustomerService {
     public String createCustomer(@Valid CustomerRequest request) {
         //System.out.println(request.address());
         var customer = repository.save(mapper.toCustomer(request));
+
+        publisher.publish("CREATED", customer);
+
         return customer.getId();
     }
 
@@ -41,6 +48,8 @@ public class CustomerService {
 
         mergeCustomer(customer, request);
         repository.save(customer);
+        publisher.publish("UPDATED", customer);
+
     }
 
     private void mergeCustomer(Customer customer, @Valid CustomerRequest request) {
@@ -69,6 +78,8 @@ public class CustomerService {
     }
 
     public void deleteById(String customerId) {
+        Customer customer = repository.findById(customerId).orElseThrow(()->new CustomerNotFoundException("Customer Not Found with Id: "+customerId));
         repository.deleteById(customerId);
+        publisher.publish("DELETED",customer);
     }
 }

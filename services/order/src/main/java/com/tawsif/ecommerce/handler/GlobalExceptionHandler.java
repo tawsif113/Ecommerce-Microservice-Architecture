@@ -1,7 +1,7 @@
 package com.tawsif.ecommerce.handler;
 
 
-import com.tawsif.ecommerce.order.BusinessException;
+import com.tawsif.ecommerce.exception.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;

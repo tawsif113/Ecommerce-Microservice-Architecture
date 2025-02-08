@@ -1,7 +1,7 @@
 package com.tawsif.ecommerce.kafka;
 
 import com.tawsif.ecommerce.customer.CustomerResponse;
-import com.tawsif.ecommerce.order.PaymentMethod;
+import com.tawsif.ecommerce.order.models.PaymentMethod;
 import com.tawsif.ecommerce.product.PurchaseResponse;
 
 import java.math.BigDecimal;

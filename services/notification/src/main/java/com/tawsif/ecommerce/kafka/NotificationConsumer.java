@@ -1,6 +1,7 @@
 package com.tawsif.ecommerce.kafka;
 
 import com.tawsif.ecommerce.email.EmailService;
+import com.tawsif.ecommerce.kafka.customer.CustomerEvent;
 import com.tawsif.ecommerce.kafka.order.OrderConfirmation;
 import com.tawsif.ecommerce.kafka.payment.NotificationRepository;
 import com.tawsif.ecommerce.kafka.payment.PaymentConfirmation;
@@ -33,13 +34,7 @@ public class NotificationConsumer {
     @KafkaListener(topics = "payment-topic")
     public void consumePaymentSuccessNotification(PaymentConfirmation paymentConfirmation) throws MessagingException {
         System.out.println("Consuming payment success notification for payment"+paymentConfirmation);
-//        repository.save(
-//                Notification.builder()
-//                        .type(PAYMENT_CONFIRMATION)
-//                        .notificationDate(LocalDateTime.now())
-//                        .paymentConfirmation(paymentConfirmation)
-//                        .build()
-//        );
+
         Notification notification = new Notification();
         notification.setType(NotificationType.PAYMENT_CONFIRMATION);
         notification.setNotificationDate(LocalDateTime.now());
@@ -60,13 +55,6 @@ public class NotificationConsumer {
     @KafkaListener(topics = "order-topic")
     public void consumeOrderConfirmationNotification(OrderConfirmation orderConfirmation) throws MessagingException {
         System.out.println("Consuming order success notification for payment "+ orderConfirmation);
-//        repository.save(
-//                Notification.builder()
-//                        .type(PAYMENT_CONFIRMATION)
-//                        .notificationDate(LocalDateTime.now())
-//                        .orderConfirmation(orderConfirmation)
-//                        .build()
-//        );
 
         Notification notification = new Notification();
         notification.setType(NotificationType.ORDER_CONFIRMATION);
@@ -83,5 +71,17 @@ public class NotificationConsumer {
                 orderConfirmation.products()
         );
 
+    }
+
+    @KafkaListener(topics = "customer-events")
+    public void handleCustomerEvent(CustomerEvent event){
+        System.out.println("Consuming customer event: " + event);
+        System.out.println(event.customer());
+        // Process customer event here, for example, save it to a database or perform any necessary actions.
+        String eventType = event.eventType();
+        Notification notification = new Notification();
+        notification.setType(NotificationType.valueOf(eventType));
+        notification.setNotificationDate(LocalDateTime.now());
+        repository.save(notification);
     }
 }

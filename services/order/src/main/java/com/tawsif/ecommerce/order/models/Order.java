@@ -1,5 +1,6 @@
-package com.tawsif.ecommerce.payment;
+package com.tawsif.ecommerce.order.models;
 
+import com.tawsif.ecommerce.orderline.OrderLine;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -8,25 +9,32 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-@Table(name = "payment")
-public class Payment {
-
+@Table(name = "customer_order")
+public class Order {
 
     @Id
     @GeneratedValue
     private Integer id;
-    private BigDecimal amount;
+
+    private String reference;
+
+    private BigDecimal totalAmount;
+
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
-    private Integer orderId;
+
+    private String customerId;
+    @OneToMany(mappedBy = "order")
+    private List<OrderLine> orderLines;
 
     @CreatedDate
     @Column(updatable = false,nullable = false)
@@ -36,10 +44,8 @@ public class Payment {
     @Column(updatable = false)
     private LocalDateTime lastModifiedAt;
 
-    // Empty constructor
-    public Payment() {}
+    public Order(){}
 
-    // Getters and setters
     public Integer getId() {
         return id;
     }
@@ -48,12 +54,20 @@ public class Payment {
         this.id = id;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public String getReference() {
+        return reference;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
+    public BigDecimal getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(BigDecimal totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public PaymentMethod getPaymentMethod() {
@@ -64,12 +78,20 @@ public class Payment {
         this.paymentMethod = paymentMethod;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public String getCustomerId() {
+        return customerId;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setCustomerId(String customerId) {
+        this.customerId = customerId;
+    }
+
+    public List<OrderLine> getOrderLines() {
+        return orderLines;
+    }
+
+    public void setOrderLines(List<OrderLine> orderLines) {
+        this.orderLines = orderLines;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -87,4 +109,5 @@ public class Payment {
     public void setLastModifiedAt(LocalDateTime lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
+
 }

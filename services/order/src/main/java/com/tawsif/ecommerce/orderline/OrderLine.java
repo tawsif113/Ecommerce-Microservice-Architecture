@@ -1,7 +1,7 @@
 package com.tawsif.ecommerce.orderline;
 
 
-import com.tawsif.ecommerce.order.Order;
+import com.tawsif.ecommerce.order.models.Order;
 import jakarta.persistence.*;
 import lombok.*;
 

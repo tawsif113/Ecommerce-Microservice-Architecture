@@ -1,6 +1,6 @@
 package com.tawsif.ecommerce.notification;
 
-import com.tawsif.ecommerce.payment.PaymentMethod;
+import com.tawsif.ecommerce.payment.models.PaymentMethod;
 
 import java.math.BigDecimal;
 

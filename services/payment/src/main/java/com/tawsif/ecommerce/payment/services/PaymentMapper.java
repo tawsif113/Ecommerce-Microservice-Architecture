@@ -1,5 +1,7 @@
-package com.tawsif.ecommerce.payment;
+package com.tawsif.ecommerce.payment.services;
 
+import com.tawsif.ecommerce.payment.models.Payment;
+import com.tawsif.ecommerce.payment.models.PaymentRequest;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Service;
 

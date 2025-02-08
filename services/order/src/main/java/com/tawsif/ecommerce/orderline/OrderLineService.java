@@ -1,8 +1,7 @@
 package com.tawsif.ecommerce.orderline;
 
-import com.tawsif.ecommerce.order.OrderLineMapper;
-import com.tawsif.ecommerce.order.OrderLineRepository;
-import lombok.RequiredArgsConstructor;
+import com.tawsif.ecommerce.order.services.OrderLineMapper;
+import com.tawsif.ecommerce.order.repositories.OrderLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.tawsif.ecommerce.order;
+package com.tawsif.ecommerce.order.models;
 
 import com.tawsif.ecommerce.product.PurchaseRequest;
 import jakarta.validation.constraints.NotBlank;
